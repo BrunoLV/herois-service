@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:tns="http://valhala.com/herois/services/HeroisService/v1" 
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                  name="HeroisService" 
+                  targetNamespace="http://valhala.com/herois/services/HeroisService/v1">
+    
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://valhala.com/herois/services/HeroisService/v1"
+                    xmlns:heroi="http://valhala.com/heroi/domain/v1">
+            <xsd:import namespace="http://valhala.com/heroi/domain/v1" schemaLocation="../schemas/heroi_v1.xsd" />
+      
+            <xsd:element name="listarHerois">
+                <xsd:complexType />
+            </xsd:element>
+      
+            <xsd:element name="listarHeroisResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="heroi" type="heroi:heroi" maxOccurs="unbounded"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+      
+            <xsd:element name="incluirHeroi">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="heroi" type="heroi:heroi" minOccurs="1" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:schema>
+    </wsdl:types>
+  
+    <wsdl:message name="listarHeroisRequest">
+        <wsdl:part element="tns:listarHerois" name="parameters"/>
+    </wsdl:message>
+    <wsdl:message name="listarHeroisResponse">
+        <wsdl:part element="tns:listarHeroisResponse" name="parameters"/>
+    </wsdl:message>
+  
+    <wsdl:message name="incluirHeroiRequest">
+        <wsdl:part element="tns:incluirHeroi" name="parameters" />
+    </wsdl:message>
+  
+    <wsdl:portType name="HeroisService">
+        <wsdl:operation name="listarHerois">
+            <wsdl:input message="tns:listarHeroisRequest"/>
+            <wsdl:output message="tns:listarHeroisResponse"/>
+        </wsdl:operation>
+    
+        <wsdl:operation name="incluirHeroi">
+            <wsdl:input message="tns:incluirHeroiRequest"/>
+        </wsdl:operation>
+    </wsdl:portType>
+  
+    <wsdl:binding name="HeroisServiceSOAP" type="tns:HeroisService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="listarHerois">
+            <soap:operation soapAction="HeroisService/ListarHerois"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    
+        <wsdl:operation name="incluirHeroi">
+            <soap:operation soapAction="HeroisService/IncluirHeroi"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+  
+    <wsdl:service name="HeroisService">
+        <wsdl:port binding="tns:HeroisServiceSOAP" name="HeroisServiceSOAP">
+            <soap:address location="ENDERECO_SERVICO"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
+ 

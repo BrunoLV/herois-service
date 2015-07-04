@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://valhala.com/heroi/domain/v1" 
+	xmlns:tns="http://valhala.com/heroi/domain/v1" 
+	elementFormDefault="qualified">
+	
+	<complexType name="heroi">
+		<sequence>
+			<element name="id" type="long" minOccurs="1" maxOccurs="1" />
+			<element name="nome" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="editora" type="string" minOccurs="1" maxOccurs="1" />
+                        <element name="anoPrimeriaAparicao" type="string" minOccurs="1" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+</schema>
