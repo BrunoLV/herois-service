@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "HeroisService", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", wsdlLocation = "file:/home/brunolv/NetBeansProjects/herois-service/src/main/webapp/WEB-INF/contracts/HeroisService.wsdl")
+@WebServiceClient(name = "HeroisService", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", wsdlLocation = "file:/home/brunolv/Desenv/IdeaProjects/herois-service/src/main/webapp/WEB-INF/contracts/HeroisService.wsdl")
 public class HeroisService_Service
     extends Service
 {
@@ -30,7 +30,7 @@ public class HeroisService_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/brunolv/NetBeansProjects/herois-service/src/main/webapp/WEB-INF/contracts/HeroisService.wsdl");
+            url = new URL("file:/home/brunolv/Desenv/IdeaProjects/herois-service/src/main/webapp/WEB-INF/contracts/HeroisService.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

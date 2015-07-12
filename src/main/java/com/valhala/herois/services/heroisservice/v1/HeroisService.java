@@ -49,4 +49,26 @@ public interface HeroisService {
         @WebParam(name = "heroi", targetNamespace = "")
         Heroi heroi);
 
+    /**
+     * 
+     * @param heroi
+     */
+    @WebMethod(action = "HeroisService/EditarHeroi")
+    @Oneway
+    @RequestWrapper(localName = "editarHeroi", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", className = "com.valhala.herois.services.heroisservice.v1.EditarHeroi")
+    public void editarHeroi(
+        @WebParam(name = "heroi", targetNamespace = "")
+        Heroi heroi);
+
+    /**
+     * 
+     * @param codigo
+     */
+    @WebMethod(action = "HeroisService/DeletarHeroi")
+    @Oneway
+    @RequestWrapper(localName = "deletarHeroi", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", className = "com.valhala.herois.services.heroisservice.v1.DeletarHeroi")
+    public void deletarHeroi(
+        @WebParam(name = "codigo", targetNamespace = "")
+        long codigo);
+
 }

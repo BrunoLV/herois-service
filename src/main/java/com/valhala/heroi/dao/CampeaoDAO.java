@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 public class CampeaoDAO {
     
     private static final String SQL_INSERT = "INSERT INTO tb_campeao (nome, editora, ano) values (?, ?, ?)";
+    private static final String SQL_UPDATE = "UPDATE tb_campeao SET nome = ?, editora = ?, ano = ? WHERE codigo = ?";
+    private static final String SQL_DELETE = "DELETE FROM tb_campeao WHERE codigo = ?";
     private static final String SQL_SELECT = "SELECT * FROM tb_campeao";
     
     private Connection connection;
@@ -36,7 +38,28 @@ public class CampeaoDAO {
             ps.setString(2, campeao.getEditora());
             ps.setShort(3, campeao.getAnoPrimeiraAparicao());
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+        }
+    }
+
+    public void atualizar(Campeao campeao) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL_UPDATE)){
+            ps.setString(1, campeao.getNome());
+            ps.setString(2, campeao.getEditora());
+            ps.setShort(3, campeao.getAnoPrimeiraAparicao());
+            ps.setLong(4, campeao.getId());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletar(Long idRemocao) {
+        try (PreparedStatement ps = connection.prepareStatement(SQL_DELETE)){
+            ps.setLong(1, idRemocao);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     
@@ -58,7 +81,5 @@ public class CampeaoDAO {
         }
         return campeoes;
     }
-    
-    
-    
+
 }

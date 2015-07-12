@@ -30,6 +30,22 @@
                     </xsd:sequence>
                 </xsd:complexType>
             </xsd:element>
+
+            <xsd:element name="editarHeroi">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="heroi" type="heroi:heroi" minOccurs="1" maxOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="deletarHeroi">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="codigo" type="xsd:long" minOccurs="1"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
         </xsd:schema>
     </wsdl:types>
   
@@ -43,6 +59,14 @@
     <wsdl:message name="incluirHeroiRequest">
         <wsdl:part element="tns:incluirHeroi" name="parameters" />
     </wsdl:message>
+
+    <wsdl:message name="editarHeroiRequest">
+        <wsdl:part element="tns:editarHeroi" name="parameters"/>
+    </wsdl:message>
+
+    <wsdl:message name="deletarHeroiRequest">
+        <wsdl:part element="tns:deletarHeroi" name="parameters"/>
+    </wsdl:message>
   
     <wsdl:portType name="HeroisService">
         <wsdl:operation name="listarHerois">
@@ -52,6 +76,14 @@
     
         <wsdl:operation name="incluirHeroi">
             <wsdl:input message="tns:incluirHeroiRequest"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="editarHeroi">
+            <wsdl:input message="tns:editarHeroiRequest"/>
+        </wsdl:operation>
+
+        <wsdl:operation name="deletarHeroi">
+            <wsdl:input message="tns:deletarHeroiRequest"/>
         </wsdl:operation>
     </wsdl:portType>
   
@@ -69,6 +101,20 @@
     
         <wsdl:operation name="incluirHeroi">
             <soap:operation soapAction="HeroisService/IncluirHeroi"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+
+        <wsdl:operation name="editarHeroi">
+            <soap:operation soapAction="HeroisService/EditarHeroi"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+
+        <wsdl:operation name="deletarHeroi">
+            <soap:operation soapAction="HeroisService/DeletarHeroi"/>
             <wsdl:input>
                 <soap:body use="literal"/>
             </wsdl:input>

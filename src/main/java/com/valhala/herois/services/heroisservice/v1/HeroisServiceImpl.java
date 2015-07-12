@@ -27,10 +27,6 @@ import javax.xml.ws.ResponseWrapper;
         wsdlLocation = "WEB-INF/contracts/HeroisService.wsdl")
 public class HeroisServiceImpl implements HeroisService {
 
-    @WebMethod(action = "HeroisService/ListarHerois")
-    @WebResult(name = "heroi", targetNamespace = "")
-    @RequestWrapper(localName = "listarHerois", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", className = "com.valhala.herois.services.heroisservice.v1.ListarHerois")
-    @ResponseWrapper(localName = "listarHeroisResponse", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", className = "com.valhala.herois.services.heroisservice.v1.ListarHeroisResponse")
     @Override
     public List<Heroi> listarHerois() {
         List<Heroi> herois = new ArrayList<>();
@@ -54,9 +50,6 @@ public class HeroisServiceImpl implements HeroisService {
         return herois;
     }
 
-    @WebMethod(action = "HeroisService/IncluirHeroi")
-    @Oneway
-    @RequestWrapper(localName = "incluirHeroi", targetNamespace = "http://valhala.com/herois/services/HeroisService/v1", className = "com.valhala.herois.services.heroisservice.v1.IncluirHeroi")
     @Override
     public void incluirHeroi(Heroi heroi) {
         Campeao campeao = new Campeao(heroi.getNome(), heroi.getEditora(), Short.parseShort(heroi.getAnoPrimeriaAparicao()));
@@ -67,5 +60,26 @@ public class HeroisServiceImpl implements HeroisService {
             System.out.println("OCORREU ERRO: " + e.getMessage());
         }
     }
-    
+
+    @Override
+    public void editarHeroi(Heroi heroi) {
+        Campeao campeao = new Campeao(heroi.getId(), heroi.getNome(), heroi.getEditora(), Short.parseShort(heroi.getAnoPrimeriaAparicao()));
+        try(Connection connection = ConnectionFactory.getConnection()) {
+            CampeaoDAO cdao = new CampeaoDAO(connection);
+            cdao.atualizar(campeao);
+        } catch (Exception e) {
+            System.out.println("OCORREU ERRO: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void deletarHeroi(long codigo) {
+        try(Connection connection = ConnectionFactory.getConnection()) {
+            CampeaoDAO cdao = new CampeaoDAO(connection);
+            cdao.deletar(codigo);
+        } catch (Exception e) {
+            System.out.println("OCORREU ERRO: " + e.getMessage());
+        }
+    }
+
 }

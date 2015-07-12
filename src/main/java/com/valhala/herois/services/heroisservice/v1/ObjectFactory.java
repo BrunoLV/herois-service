@@ -46,6 +46,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DeletarHeroi }
+     * 
+     */
+    public DeletarHeroi createDeletarHeroi() {
+        return new DeletarHeroi();
+    }
+
+    /**
+     * Create an instance of {@link EditarHeroi }
+     * 
+     */
+    public EditarHeroi createEditarHeroi() {
+        return new EditarHeroi();
+    }
+
+    /**
      * Create an instance of {@link ListarHeroisResponse }
      * 
      */
